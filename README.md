@@ -7,6 +7,10 @@ Unit 4 Homework - Versioning 1/31/2018<br>
 CThigpen_Assignment04_RMD.html<br>
 CThigpen_rswirl.txt</h6><br>
 
+Unit 5 Homework - Tidy Data 2/6/2018<br>
+<h6>CThigpen_Assignment05_RMD.rmd<br>
+CThigpen_Assignment04_RMD.html</h6><br>
+
 ## Credits
 "college_recent_grads.csv" data from FiveThirtyEight at https://github.com/rudeboybert/fivethirtyeight
 
