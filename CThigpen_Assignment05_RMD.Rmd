@@ -1,0 +1,61 @@
+---
+title: "Assignment 5"
+author: "Cory Thigpen"
+date: "February 6, 2018"
+output:
+  html_document: default
+---
+
+## Question 1 - Data Munging:
+```{r yob2016, echo=TRUE}
+yob2016 <- read.csv("C:/Users/william.thigpen/Dropbox/Doing Data Science/Unit 5/yob2016.txt", header=FALSE, sep=";")
+setwd("C:\\Users\\william.thigpen\\Dropbox\\Doing Data Science\\Unit 5")
+colnames(yob2016) <- c("name","gender","count")
+df <- yob2016
+
+summary(df)
+str(df)
+
+grep("yyy",yob2016$name)
+yob2016[212,]
+
+df<- df[-212,]
+df[212,]
+write.csv(df, "y2016.csv")
+y2016 <- df
+```
+
+## Question 2 - Data Merging:
+```{r yob2015, echo=TRUE}
+yob2015 <- read.csv("C:/Users/william.thigpen/Dropbox/Doing Data Science/Unit 5/yob2015.txt", header=FALSE)
+colnames(yob2015) <- c("name","gender","count")
+y2015 <- yob2015
+
+tail(y2015, 10)
+
+## I don't find anything <i>very</i> interesting. The names are strange, the data is sorted by name and gender so the "Z" males appear as the last ten rows. Mimumum counts to appear in this data set must be set to five.
+
+final <- merge(y2016, y2015, by="name", all=FALSE)
+```
+
+## Question 3 - Data Summary:
+```{r final, echo=TRUE}
+final$Total <- final$count.x + final$count.y
+summary(final)
+
+## 39,829 children shared a name with others in the lists from 2015 and 2016
+
+final <- final[with(final, order(-Total)), ]
+head(final, 10)
+
+Top10Girls <- final[final$gender.x == 'F',]
+head(Top10Girls, 10)
+
+FinalTop10Girls <- Top10Girls[1:10,]
+row.names(FinalTop10Girls) <- c()
+FinalTop10Girls <- within(FinalTop10Girls, rm("gender.x", "count.x", "gender.y", "count.y"))
+write.csv(FinalTop10Girls, "FinalTop10Girls.csv")
+```
+
+## Question 4 - R Markdown & Codebook:
+https://github.com/corythigpen/SMU-MSDS-Homework.git
